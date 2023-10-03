@@ -2,11 +2,9 @@
 
 ## D. Decoding Task
 
+​	异或
+
 ```c++
-#include <bits/stdc++.h>
-
-using namespace std;
-
 int char2int(char c) {
     if (c <= '9') return (c - '0');
     return (c - 'A' + 10);
@@ -34,25 +32,15 @@ void solve(string a, string b) {
     }
     cout << '\n';
 }
-
-int main() {
-    freopen("decode.in", "r", stdin);
-    freopen("decode.out", "w", stdout);
-    string a, b;
-    while (cin >> a >> b) solve(a, b);
-    return 0;
-}
 ```
 
 
 
 ## C. Cricket Field
 
+​	找最大正方形；遍历+二分找点
+
 ```C++
-#include <bits/stdc++.h>
-
-using namespace std;
-
 int n, w, h;
 vector<int> px, py;
 vector<pair<int, int>> ps;
@@ -102,24 +90,15 @@ void solve() {
     }
     cout << xx << ' ' << yy << ' ' << ll << '\n';
 }
-
-signed main() {
-    freopen("cricket.in", "r", stdin);
-    freopen("cricket.out", "w", stdout);
-    solve();
-    return 0;
-}
 ```
 
 
 
 ## B. Bricks
 
+​	旋转角度
+
 ```C++
-#include <bits/stdc++.h>
-
-using namespace std;
-
 const double pi = acos(-1.0);
 
 void solve() {
@@ -148,13 +127,6 @@ void solve() {
     }
     cout << "NO\n";
 }
-
-signed main() {
-    freopen("bricks.in", "r", stdin);
-    freopen("bricks.out", "w", stdout);
-    solve();
-    return 0;
-}
 ```
 
 
@@ -164,5 +136,4 @@ signed main() {
 
 
 ## A. Amusing Numbers
-
 
