@@ -83,3 +83,49 @@ void solve(int n, int m) {
 
 
 ## F. Funny Language
+
+​	优先队列
+
+```c++
+# Time limit exceeded on test 10
+void solve() {
+    int n, m; cin >> n >> m;
+    vector<string> s(m);
+    for (int i = 0; i < m; ++i) cin >> s[i];
+    sort(s.begin(), s.end());
+    vector<unordered_map<int, int>> cnt(m); 
+    for (int i = 0; i < m; ++i) for (int j = 0, l = s[i].length(); j < l; ++j) ++cnt[i][s[i][j] - 'A'];
+    priority_queue<pair<int, string>> q;
+    q.push({0, ""});
+    while (n) {
+        pair<int, string> nw = q.top(); q.pop();
+        auto rg = equal_range(s.begin(), s.end(), nw.second);
+        if (nw.second != "" && rg.first == rg.second) {
+            cout << nw.second << '\n';
+            --n;
+        }
+        unordered_map<int, int> tmp;
+        for (int j = 0, l = nw.second.length(); j < l; ++j) ++tmp[nw.second[j] - 'A'];
+        for (string i = nw.second + 'A', ed = nw.second + 'Z'; i <= ed; ++i.back()) {
+            ++tmp[i.back() - 'A'];
+            nw.first = 0;
+            for (int j = 0; j < m; ++j) {
+                int f = 1;
+                for (int c = 0; c < 26; ++c) {
+                    if (tmp[c] > cnt[j][c]) f = 0;
+                }
+                if (f) ++nw.first;
+            }
+            q.push({nw.first, i});
+            --tmp[i.back() - 'A'];
+        }
+    }
+}
+```
+
+​	对于超时问题：将`vector<unordered_map<int, int>> cnt(m); `改成全局的二维数组即可
+
+```C++
+const int M = 1010;
+int cnt[M][26];
+```
