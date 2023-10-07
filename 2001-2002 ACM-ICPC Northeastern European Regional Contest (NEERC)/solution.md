@@ -137,3 +137,57 @@ void solve() {
 
 ## A. Amusing Numbers
 
+​	模拟
+
+```C++
+#define int long long
+
+vector<int> split_num(int x) {
+    vector<int> res;
+    while (x) {
+        res.push_back(x % 10);
+        x /= 10;
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+void solve() {
+    int k, m; cin >> k >> m;
+    vector<int> ele = split_num(k);
+    int sum = 0;
+    int l = ele.size();
+    for (int i = 0; i < l; ++i) {
+        int base = 1, lst = 0;
+        for (int j = 0; j <= i; ++j) {
+            lst = lst * 10 + ele[j];
+            base *= 10;
+        }
+        base /= 10;
+        sum += lst - base + 1;
+    }
+    if (sum > m) {
+        cout << "0\n";
+        return ;
+    }
+    if (sum == m) {
+        cout << k << '\n';
+        return ;
+    }
+    int lst = k, base = 1;
+    for (int i = 1; i < l; ++i) base *= 10;
+    if (lst == base) {
+        cout << "0\n";
+        return ;
+    }
+    while (sum < m) {
+        lst *= 10;
+        base *= 10;
+        sum += lst - base;
+        if (sum >= m) {
+            cout << base + (m - sum + lst - base - 1) << '\n';
+            return ;
+        }
+    }
+}
+```
